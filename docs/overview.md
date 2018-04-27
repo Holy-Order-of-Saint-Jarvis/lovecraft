@@ -53,5 +53,8 @@ To support this goal, dependencies **should** be ensured to be available on *at 
 ### Modular
 The plan for the PLP is to have a number of small projects that can be reconfigured as necessary on-site. It **may** be worthwhile to structure the software similarly, if there are potentially large numbers of "client" projects.
 
+## Architecture
+![architecture](_static/layers.svg)
+
 ---
 1. <b id='f1'>NB</b>: This should mitigate last year's experience of spending most of the weekend attempting to troubleshoot a failed Tecthulu and then replacing the network code.[↩](#a1)
