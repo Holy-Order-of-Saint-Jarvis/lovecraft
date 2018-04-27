@@ -40,6 +40,16 @@ Unfortunately, there's no guarantee that we'll be granted access to this upstrea
 
 To promote this goal, the code may be separated into "wire" (network and data-handling) code and "business" (core logic) code.
 
+### Portable
+As previously mentioned, this code may be required to run on multiple different platforms.
+To support this goal, dependencies **should** be ensured to be available on *at least*:
+
+  - Linux
+    - ARM (Raspberry Pi/Arduino)
+    - x64
+  - Darwin/x64
+  - Windows(?)
+
 ### Modular
 The plan for the PLP is to have a number of small projects that can be reconfigured as necessary on-site. It **may** be worthwhile to structure the software similarly, if there are potentially large numbers of "client" projects.
 
