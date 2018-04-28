@@ -127,6 +127,17 @@ def test_portal_posargs():
     assert p.resonators == {}
 
 
+def test_portal_validate_resonators():
+    reso = types.Resonator(owner='bob', level=8)
+    with pytest.raises(TypeError):
+        # invalid position
+        types.Portal(title='testing', resonators={'answer': reso})
+
+    with pytest.raises(TypeError):
+        # invalid reso
+        types.Portal(title='testing', resonators={types.Orientation.NORTH: 0})
+
+
 def test_portal_deploy():
     p = types.Portal('testing')
     assert p.title == 'testing'
@@ -145,3 +156,40 @@ def test_portal_deploy():
         types.Orientation.NORTH:
             types.Resonator(owner='bob',
                             level=8)}
+
+    p3 = p2.deploy('alice', types.Faction.ENL, types.Orientation.SOUTH, 8)
+    assert p3.title == 'testing'
+    assert p3.faction == types.Faction.ENL
+    assert p3.owner == 'bob'
+    assert p3.resonators == {
+        types.Orientation.NORTH:
+            types.Resonator(owner='bob', level=8),
+        types.Orientation.SOUTH:
+            types.Resonator(owner='alice', level=8),
+    }
+
+    with pytest.raises(ValueError):
+        # can't deploy lower-level reso
+        p3.deploy('bob', types.Faction.ENL, types.Orientation.NORTH, 7)
+
+
+def test_portal_damage():
+    p = types.Portal(title='testing')
+    p = p.deploy('bob', types.Faction.ENL, types.Orientation.NORTH, 8)
+
+    p2 = p.damage(types.Orientation.NORTH, 77)
+    assert p2.title == 'testing'
+    assert p2.owner == 'bob'
+    assert p2.faction == types.Faction.ENL
+    assert p2.resonators == {
+        types.Orientation.NORTH:
+            types.Resonator(owner='bob', level=8, health=23)}
+
+    p3 = p2.damage(types.Orientation.NORTH, 50)
+    assert p3.title == 'testing'
+    assert p3.owner is None
+    assert p3.faction is None
+    assert p3.resonators == {}
+
+    p4 = p3.damage(types.Orientation.NORTH, 100)
+    assert p4 == p3
