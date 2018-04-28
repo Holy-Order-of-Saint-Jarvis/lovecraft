@@ -1,8 +1,7 @@
 # coding: utf-8
 
-from lovecraft import types
-
 import pytest
+from lovecraft import types
 
 
 def test_orientation():

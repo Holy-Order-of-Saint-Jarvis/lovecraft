@@ -1,7 +1,7 @@
 # coding: utf-8
 
-from enum import Enum
 import re
+from enum import Enum
 from typing import Dict
 
 import attr
