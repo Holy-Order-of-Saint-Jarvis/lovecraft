@@ -97,3 +97,51 @@ def test_resonator_validate_health():
 
     with pytest.raises(ValueError):
         types.Resonator(owner='bob', level=1, health=999)
+
+
+def test_portal_kwargs():
+    p = types.Portal(title='testing')
+    assert p.title == 'testing'
+    assert p.owner is None
+    assert p.faction is None
+    assert p.resonators == {}
+
+    p = types.Portal(title='testing', owner='bob', faction=types.Faction.ENL)
+    assert p.title == 'testing'
+    assert p.owner == 'bob'
+    assert p.faction == types.Faction.ENL
+    assert p.resonators == {}
+
+
+def test_portal_posargs():
+    p = types.Portal('testing')
+    assert p.title == 'testing'
+    assert p.owner is None
+    assert p.faction is None
+    assert p.resonators == {}
+
+    p = types.Portal('testing', types.Faction.ENL, 'bob')
+    assert p.title == 'testing'
+    assert p.faction == types.Faction.ENL
+    assert p.owner == 'bob'
+    assert p.resonators == {}
+
+
+def test_portal_deploy():
+    p = types.Portal('testing')
+    assert p.title == 'testing'
+    assert p.owner is None
+    assert p.faction is None
+    assert p.resonators == {}
+
+    p2 = p.deploy(agent='bob',
+                  faction=types.Faction.ENL,
+                  position=types.Orientation.NORTH,
+                  level=8)
+    assert p2.title == 'testing'
+    assert p2.faction == types.Faction.ENL
+    assert p2.owner == 'bob'
+    assert p2.resonators == {
+        types.Orientation.NORTH:
+            types.Resonator(owner='bob',
+                            level=8)}
