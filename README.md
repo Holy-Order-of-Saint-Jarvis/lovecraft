@@ -33,7 +33,7 @@ tox
 
 ### Further information
 
-Further information, including architecture diagrams, is available in the [overview](docs/overview.md).
+Further information, including architecture diagrams, is available in the [project overview](docs/overview.md).
 
 <!-- links -->
 [pipenv]: https://pipenv.readthedocs.io/
