@@ -1,4 +1,6 @@
 # :octopus: lovecraft
+[![Build Status](https://travis-ci.org/Holy-Order-of-Saint-Jarvis/lovecraft.svg?branch=hotfix%2Fissues-10)](https://travis-ci.org/Holy-Order-of-Saint-Jarvis/lovecraft)
+
 Tecthulu API and (simplified) Ingress game model.
 
 ## Development
